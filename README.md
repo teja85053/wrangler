@@ -220,7 +220,7 @@ permission. No endorsement by The Apache Software Foundation is implied by the u
 
 
 
-# the readme according to our assignment
+# The readme according to our assignment
 
 # CDAP Wrangler Library Enhancements
 
