@@ -1,0 +1,40 @@
+
+## Project Title:
+Enhancing Wrangler with Byte Size and Time Duration Parsers and Advanced Aggregation Support
+
+## AI-Assisted Prompts Used
+
+### 1. Project Planning & Design
+- "Explain how to enhance the Wrangler grammar to support BYTE_SIZE and TIME_DURATION."
+- "Guide for implementing new token types in an ANTLR-based grammar."
+- "Design a new directive for aggregating byte size and time duration fields in CDAP Wrangler."
+- "How to structure a directive to support arguments like units and aggregation types (total, average, p95)."
+
+### 2. Code Implementation Support
+- "Write Java code to parse '10KB', '1.5MB', '150ms', '2.5s' into bytes and milliseconds."
+- "Create a Token class in Wrangler that supports canonical byte/time conversion."
+- "Regenerate ANTLR parser and integrate it into the Wrangler Maven build."
+- "Accumulate values across rows using ExecutorContext for an aggregate directive."
+- "Support expressions like '1KB + 200B' in Wrangler directive arguments."
+
+### 3. Testing Strategy
+- "Write JUnit test cases for ByteSize and TimeDuration parsers in Java."
+- "Test a new directive that calculates total and average values from unit-based inputs."
+- "Create a test scenario for percentile aggregation (p95/p99)."
+- "Mock data rows for Wrangler TestingRig and validate directive outputs."
+
+### 4. Documentation & Report Writing
+- "Generate a project summary for the title page of a technical report."
+- "Write an introduction and objective section for a software engineering enhancement report."
+- "List challenges and resolutions faced during grammar and directive enhancement."
+- "Write a professional conclusion summarizing directive impact and future scope."
+- "Draft references and appendices with unit support tables and sample data."
+- "Generate a clean visual flowchart showing input to output transformation using aggregate-stats."
+
+### 5. Extension Suggestions
+- "Add percentile (p95/p99) support to a custom aggregation directive."
+- "How to parse and evaluate expressions with units in Java using custom grammar."
+- "Structure a complete prompts.txt file to reflect AI-assisted contributions in a development project."
+
+## Purpose
+This file documents AI-generated prompts that contributed to improving the quality, correctness, and completeness of this project through code generation, architectural guidance, and professional documentation support.
