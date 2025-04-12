@@ -64,6 +64,8 @@ directive
     | stringList
     | numberRanges
     | properties
+    | byteSize
+    | timeDuration
   )*?
   ;
 
@@ -140,7 +142,7 @@ numberRange
  ;
 
 value
- : String | Number | Column | Bool
+ : String | Number | Column | Bool | BYTE_SIZE | TIME_DURATION
  ;
 
 ecommand
@@ -165,6 +167,14 @@ number
 
 bool
  : Bool
+ ;
+
+byteSize
+ : BYTE_SIZE
+ ;
+
+timeDuration
+ : TIME_DURATION
  ;
 
 condition
@@ -272,6 +282,32 @@ Column
 String
  : '\'' ( EscapeSequence | ~('\'') )* '\''
  | '"'  ( EscapeSequence | ~('"') )* '"'
+ ;
+
+BYTE_SIZE
+ : Int ('.' Digit*)? BYTE_UNIT
+ ;
+
+TIME_DURATION
+ : Int ('.' Digit*)? TIME_UNIT
+ ;
+
+fragment BYTE_UNIT
+ : 'B'                 // Bytes
+ | 'KB' | 'K'          // Kilobytes
+ | 'MB' | 'M'          // Megabytes
+ | 'GB' | 'G'          // Gigabytes
+ | 'TB' | 'T'          // Terabytes
+ | 'PB' | 'P'          // Petabytes
+ ;
+
+fragment TIME_UNIT
+ : 'ns'                // Nanoseconds
+ | 'ms'                // Milliseconds
+ | 's'                 // Seconds
+ | 'min' | 'm'         // Minutes
+ | 'h'                 // Hours
+ | 'd'                 // Days
  ;
 
 EscapeSequence
