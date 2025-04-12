@@ -49,6 +49,7 @@ public class AvroSchemaGlossary {
   public void setAvroSchemaLoader(AvroSchemaLoader avroSchemaLoader) {
     this.avroSchemaLoader = avroSchemaLoader;
   }
+  
   /**
    * Configures the {@link AvroSchemaGlossary} with the schemas accessible through the {@link AvroSchemaLoader}.
    *
@@ -58,6 +59,7 @@ public class AvroSchemaGlossary {
     try {
       glossary = avroSchemaLoader.load();
     } catch (IOException e) {
+      LOG.error("Failed to load schemas", e);
       return false;
     }
     return true;
@@ -75,14 +77,14 @@ public class AvroSchemaGlossary {
     Schema result = null;
     for (Schema schema : schemas) {
       try {
-        long rev = Long.parseLong(schema.getProp(AvroSchemaGlossary.REVISION_PROPERTY), 10);
+        long rev = Long.parseLong(schema.getProp(REVISION_PROPERTY), 10);
         if (rev == revision) {
           result = schema;
           break;
         }
       } catch (NumberFormatException e) {
-        LOG.error(String.format("unable to parse %s property within schema %s", AvroSchemaGlossary.REVISION_PROPERTY,
-                                schema.getFullName()));
+        LOG.error(String.format("unable to parse %s property within schema %s", REVISION_PROPERTY,
+                              schema.getFullName()));
       }
     }
     return result;

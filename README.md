@@ -216,3 +216,83 @@ Cask is a trademark of Cask Data, Inc. All rights reserved.
 
 Apache, Apache HBase, and HBase are trademarks of The Apache Software Foundation. Used with
 permission. No endorsement by The Apache Software Foundation is implied by the use of these marks.
+
+
+
+
+# the readme according to our assignment
+
+# CDAP Wrangler Library Enhancements
+
+## New Parsers for Byte Size and Time Duration Units
+
+This enhancement adds native support for parsing and utilizing byte size and time duration units within Wrangler recipes. The new parsers allow for simplified handling of data size and time interval values in transformations and aggregations.
+
+### Byte Size Parser
+
+The Byte Size parser recognizes values with byte-related units and automatically converts them to a canonical form.
+
+**Supported Units:**
+- B (Bytes)
+- KB, K (Kilobytes)
+- MB, M (Megabytes)
+- GB, G (Gigabytes)
+- TB, T (Terabytes)
+- PB, P (Petabytes)
+
+**Example Values:**
+- `10B` - 10 bytes
+- `1.5KB` - 1.5 kilobytes
+- `2.7MB` - 2.7 megabytes
+- `4G` - 4 gigabytes
+
+### Time Duration Parser
+
+The Time Duration parser recognizes values with time-related units and automatically converts them to a canonical form.
+
+**Supported Units:**
+- ns (Nanoseconds)
+- ms (Milliseconds)
+- s (Seconds)
+- min, m (Minutes)
+- h (Hours)
+- d (Days)
+
+**Example Values:**
+- `100ns` - 100 nanoseconds
+- `250ms` - 250 milliseconds
+- `1.5s` - 1.5 seconds
+- `30m` - 30 minutes
+- `2h` - 2 hours
+
+## New Directive: aggregate-stats
+
+This enhancement also adds a new directive called `aggregate-stats` that utilizes the byte size and time duration parsers to compute aggregated statistics.
+
+### Syntax
+aggregate-stats <byte-size-column> <time-duration-column> <total-size-column> <total-time-column> [<size-unit>] [<time-unit>]
+
+### Parameters
+
+- `byte-size-column` - Source column containing byte size values
+- `time-duration-column` - Source column containing time duration values
+- `total-size-column` - Target column for the aggregated size value
+- `total-time-column` - Target column for the aggregated time value
+- `size-unit` (optional) - Output unit for size (default: MB)
+- `time-unit` (optional) - Output unit for time (default: s)
+
+### Examples
+// Aggregate data transfer sizes and response times
+aggregate-stats   total_size_mb total_time_sec
+// Specify output units
+aggregate-stats   total_size_gb total_time_min "GB" "min"
+
+### Usage Context
+
+The `aggregate-stats` directive is particularly useful for:
+
+- Log analysis: Calculating total data transferred and total processing time
+- Performance monitoring: Analyzing resource utilization and response times
+- Summary reporting: Creating aggregated metrics from granular data
+
+This directive works as an aggregator operation, processing all input rows and producing a single output row with the aggregated values.
